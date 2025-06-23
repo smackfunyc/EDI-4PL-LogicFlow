@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EDI Decoder Pro Activated</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+    .success {
+      color: green;
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="success">🎉 Thank you for upgrading to EDI Decoder Pro!</h1>
+  <p>You're all set. You can now close this tab and return to your extension.</p>
+
+  <script>
+    // Simulate storing a license flag in Chrome Extension sync storage
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get("session_id");
+
+    if (sessionId) {
+      // If this page is opened *inside the extension popup or context*, store access flag
+      if (typeof chrome !== "undefined" && chrome.storage) {
+        chrome.storage.sync.set({ ediProAccess: true }, () => {
+          console.log("✅ EDI Pro license stored in sync");
+        });
+      } else {
+        // Fallback for dev: write to localStorage
+        localStorage.setItem("ediProAccess", "true");
+      }
+    }
+  </script>
+</body>
+</html>
